@@ -30,7 +30,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     StoreRouterConnectingModule.forRoot({
       serializer: ParamSerializer
     }),
-    AngularSvgIconModule,
+    AngularSvgIconModule.forRoot(),
     ButtonModule
   ],
   providers: [DataService],
