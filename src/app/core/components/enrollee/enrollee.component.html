@@ -1,9 +1,41 @@
-<bad-card>
+<bad-card *ngIf="state$ | async as state">
   <ng-container top>
-    <button bad-btn-ico ico-sm>
+    <button *ngIf="state.locked" bad-btn-ico ico-sm (click)="unlock()">
       <svg-icon src="assets/svg/edit.svg"></svg-icon>
     </button>
-    <span class="active">Active</span>
+    <button
+      *ngIf="!state.locked"
+      bad-btn-ico
+      ico-sm
+      (click)="save(state.enrollee)"
+    >
+      <svg-icon src="assets/svg/save.svg"></svg-icon>
+    </button>
+
+    <div *ngIf="state.enrollee.active" class="active">
+      <span>Active</span>
+      <button
+        bad-btn-ico
+        ico-sm
+        color="green"
+        (click)="toggleActive()"
+        *ngIf="!state.locked"
+      >
+        <svg-icon src="assets/svg/power.svg"></svg-icon>
+      </button>
+    </div>
+    <div *ngIf="!state.enrollee.active" class="active">
+      <span>Active</span>
+      <button
+        bad-btn-ico
+        ico-sm
+        color="gray-500"
+        (click)="toggleActive()"
+        *ngIf="!state.locked"
+      >
+        <svg-icon src="assets/svg/power.svg"></svg-icon>
+      </button>
+    </div>
   </ng-container>
   <ng-container middle>
     <div class="title">
@@ -13,14 +45,19 @@
       </button>
     </div>
     <div class="id">
-      <span> FE1636A3-4D23-4068-BA56-551FAE06E29C </span>
+      <span> {{ state.enrollee.id }} </span>
     </div>
   </ng-container>
   <ng-container bottom>
-    <h2>Bradley Axelson</h2>
-    <div class="dob">
+    <bad-lockable-input
+      #input
+      [locked]="state.locked"
+      [formControl]="name"
+      [badControlBind]="state.enrollee.name"
+    ></bad-lockable-input>
+    <div class="dob" *ngIf="state.enrollee.dateOfBirth">
       <span>MM/DD/YYYY</span>
-      <span>10/20/1993</span>
+      <span>{{ state.enrollee.dateOfBirth }}</span>
     </div>
   </ng-container>
 </bad-card>
