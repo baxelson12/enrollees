@@ -14,6 +14,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ParamSerializer } from './store/serializers/param.serializer';
 import { ButtonModule } from './shared/components/button/button.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { CardModule } from './shared/components/card/card.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
       serializer: ParamSerializer
     }),
     AngularSvgIconModule.forRoot(),
-    ButtonModule
+    ButtonModule,
+    CardModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
