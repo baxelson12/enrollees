@@ -16,6 +16,7 @@ import { ButtonModule } from './shared/components/button/button.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { CardModule } from './shared/components/card/card.module';
 import { NavModule } from './shared/components/nav/nav.module';
+import { ToolbarModule } from './shared/components/toolbar/toolbar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +36,8 @@ import { NavModule } from './shared/components/nav/nav.module';
     AngularSvgIconModule.forRoot(),
     ButtonModule,
     CardModule,
-    NavModule
+    NavModule,
+    ToolbarModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
