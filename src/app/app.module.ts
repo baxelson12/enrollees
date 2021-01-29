@@ -15,6 +15,7 @@ import { ParamSerializer } from './store/serializers/param.serializer';
 import { ButtonModule } from './shared/components/button/button.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { CardModule } from './shared/components/card/card.module';
+import { NavModule } from './shared/components/nav/nav.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +34,8 @@ import { CardModule } from './shared/components/card/card.module';
     }),
     AngularSvgIconModule.forRoot(),
     ButtonModule,
-    CardModule
+    CardModule,
+    NavModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
