@@ -1,4 +1,10 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  ViewChild
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable } from 'rxjs';
@@ -26,6 +32,7 @@ const initial: State = {
   ]
 })
 export class LockableInputComponent extends BaseControlValueAccessor {
+  @ViewChild('input') input: ElementRef;
   state$: Observable<State> = this.store.select((s) => s);
   @Input('value') _value = '';
   @Input() set locked(locked: boolean) {
@@ -36,5 +43,10 @@ export class LockableInputComponent extends BaseControlValueAccessor {
     super();
     console.log('running');
     this.store.setState(initial);
+  }
+
+  focus(): void {
+    const input = this.input.nativeElement as HTMLInputElement;
+    input.focus();
   }
 }
