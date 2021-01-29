@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { Enrollee } from './core/interfaces/enrollee';
 
 import * as Selectors from './store/selectors';
-import * as Actions from './store/actions';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -20,11 +18,7 @@ export class AppComponent {
     Selectors.selectedEnrollee
   );
 
-  form = this.fb.group({
-    test: this.fb.control('')
-  });
-
-  constructor(private store: Store, private fb: FormBuilder) {
+  constructor(private store: Store) {
     this.selected$.subscribe(console.log);
   }
 }

@@ -19,6 +19,7 @@ import { BadNavModule } from './shared/components/nav/nav.module';
 import { BadToolbarModule } from './shared/components/toolbar/toolbar.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BadInputModule } from './shared/components/input/input.module';
+import { ToolbarModule } from './core/components/toolbar/toolbar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,7 +42,8 @@ import { BadInputModule } from './shared/components/input/input.module';
     BadNavModule,
     BadToolbarModule,
     ReactiveFormsModule,
-    BadInputModule
+    BadInputModule,
+    ToolbarModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
