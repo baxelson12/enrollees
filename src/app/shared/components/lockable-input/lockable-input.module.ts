@@ -4,6 +4,7 @@ import { LockableInputComponent } from './lockable-input.component';
 
 @NgModule({
   declarations: [LockableInputComponent],
-  imports: [CommonModule]
+  imports: [CommonModule],
+  exports: [LockableInputComponent]
 })
 export class BadLockableInputModule {}

@@ -1,1 +1,11 @@
-<p>lockable-input works!</p>
+<ng-container *ngIf="state$ | async as state">
+  <input
+    (input)="onChange($event.target.value)"
+    (blur)="onTouched($event.target.value)"
+    [type]="inputType"
+    [placeholder]="placeholder"
+    [attr.aria-label]="ariaLabel"
+    [value]="value"
+    [readonly]="state.locked"
+  />
+</ng-container>
