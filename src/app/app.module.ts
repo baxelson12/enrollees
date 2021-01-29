@@ -12,6 +12,8 @@ import { effects } from './store/effects';
 import { reducers } from './store/reducers';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ParamSerializer } from './store/serializers/param.serializer';
+import { ButtonModule } from './shared/components/button/button.module';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +29,9 @@ import { ParamSerializer } from './store/serializers/param.serializer';
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot({
       serializer: ParamSerializer
-    })
+    }),
+    AngularSvgIconModule,
+    ButtonModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -1,0 +1,14 @@
+.bad-btn-ico {
+  color: red;
+  height: 1.25rem;
+  width: 1.25rem;
+
+  &.ico-sm {
+    width: 1rem;
+    height: 1rem;
+  }
+  &.ico-xs {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+}
