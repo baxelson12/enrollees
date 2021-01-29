@@ -1,0 +1,10 @@
+@import 'variables';
+
+input {
+  &[readonly] {
+    color: $white;
+  }
+  &:focus:not(:read-only) {
+    text-transform: none;
+  }
+}
