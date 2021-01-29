@@ -8,6 +8,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { DataService } from './core/services/data.service';
+import { effects } from './store/effects';
+import { reducers } from './store/reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,12 +17,12 @@ import { DataService } from './core/services/data.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot(effects)
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
