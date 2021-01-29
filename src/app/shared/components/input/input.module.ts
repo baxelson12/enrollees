@@ -7,4 +7,4 @@ import { InputComponent } from './input.component';
   imports: [CommonModule],
   exports: [InputComponent]
 })
-export class InputModule {}
+export class BadInputModule {}

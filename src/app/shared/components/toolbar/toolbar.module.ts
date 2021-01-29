@@ -7,4 +7,4 @@ import { ToolbarComponent } from './toolbar.component';
   imports: [CommonModule],
   exports: [ToolbarComponent]
 })
-export class ToolbarModule {}
+export class BadToolbarModule {}

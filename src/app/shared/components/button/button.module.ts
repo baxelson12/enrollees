@@ -7,4 +7,4 @@ import { ButtonComponent } from './button.component';
   imports: [CommonModule],
   exports: [ButtonComponent]
 })
-export class ButtonModule {}
+export class BadButtonModule {}

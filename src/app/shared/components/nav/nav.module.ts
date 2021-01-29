@@ -7,4 +7,4 @@ import { NavComponent } from './nav.component';
   imports: [CommonModule],
   exports: [NavComponent]
 })
-export class NavModule {}
+export class BadNavModule {}
