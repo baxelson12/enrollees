@@ -20,11 +20,6 @@ export class AppComponent {
   );
 
   constructor(private store: Store) {
-    this.store.dispatch(
-      Actions.selectEnrollee({
-        selectedEnrolleeId: '36653835-fbe0-4c42-a93c-3e561823934f'
-      })
-    );
     this.selected$.subscribe(console.log);
   }
 }

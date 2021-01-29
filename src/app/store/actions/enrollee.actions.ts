@@ -26,13 +26,3 @@ export const deselectEnrollee = createAction(DESELECT_ENROLLEE);
 // Change sort
 export const SORT_BY = '[Enrollees] Change sort.';
 export const sortBy = createAction(SORT_BY, props<{ sortBy: any }>());
-
-// Actions
-export const actions = [
-  loadEnrollees,
-  loadEnrolleesFail,
-  loadEnrolleesSuccess,
-  selectEnrollee,
-  deselectEnrollee,
-  sortBy
-];

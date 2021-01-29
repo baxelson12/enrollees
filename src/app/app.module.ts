@@ -10,6 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { DataService } from './core/services/data.service';
 import { effects } from './store/effects';
 import { reducers } from './store/reducers';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { ParamSerializer } from './store/serializers/param.serializer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +24,10 @@ import { reducers } from './store/reducers';
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot(effects)
+    EffectsModule.forRoot(effects),
+    StoreRouterConnectingModule.forRoot({
+      serializer: ParamSerializer
+    })
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
