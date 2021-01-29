@@ -3,7 +3,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable } from 'rxjs';
 import { BaseControlValueAccessor } from '../../abstractions/BaseControlValueAccessor';
-import { InputComponent } from '../input/input.component';
 
 interface State {
   locked: boolean;
@@ -14,13 +13,13 @@ const initial: State = {
 };
 
 @Component({
-  selector: 'app-lockable-input',
+  selector: 'bad-lockable-input',
   templateUrl: './lockable-input.component.html',
   styleUrls: ['./lockable-input.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => LockableInputComponent),
       multi: true
     },
     ComponentStore
@@ -35,6 +34,7 @@ export class LockableInputComponent extends BaseControlValueAccessor {
 
   constructor(private store: ComponentStore<State>) {
     super();
+    console.log('running');
     this.store.setState(initial);
   }
 }
