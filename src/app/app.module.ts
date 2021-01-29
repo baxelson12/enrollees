@@ -17,6 +17,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { CardModule } from './shared/components/card/card.module';
 import { NavModule } from './shared/components/nav/nav.module';
 import { ToolbarModule } from './shared/components/toolbar/toolbar.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputModule } from './shared/components/input/input.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +39,9 @@ import { ToolbarModule } from './shared/components/toolbar/toolbar.module';
     ButtonModule,
     CardModule,
     NavModule,
-    ToolbarModule
+    ToolbarModule,
+    ReactiveFormsModule,
+    InputModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

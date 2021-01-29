@@ -2,6 +2,12 @@
   <h1>Enrollees</h1>
 </bad-nav>
 <bad-toolbar>
-  <ng-container left> Hello, start </ng-container>
+  <ng-container left>
+    <form [formGroup]="form">
+      <bad-input formControlName="test" placeholder="Press '/' to search">
+        <svg-icon src="assets/svg/search.svg"></svg-icon>
+      </bad-input>
+    </form>
+  </ng-container>
   <ng-container right> Hello, end </ng-container>
 </bad-toolbar>
