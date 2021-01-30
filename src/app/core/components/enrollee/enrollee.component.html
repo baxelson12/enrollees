@@ -1,6 +1,13 @@
 <bad-card *ngIf="state$ | async as state">
   <ng-container top>
-    <button *ngIf="state.locked" bad-btn-ico ico-sm (click)="unlock()">
+    <button
+      *ngIf="state.locked"
+      bad-btn-ico
+      ico-sm
+      role="button"
+      aria-label="Edit"
+      (click)="unlock()"
+    >
       <svg-icon src="assets/svg/edit.svg"></svg-icon>
     </button>
     <button
@@ -8,6 +15,8 @@
       bad-btn-ico
       ico-sm
       color="green"
+      role="button"
+      aria-label="Save"
       (click)="save(state.enrollee)"
     >
       <svg-icon src="assets/svg/save.svg"></svg-icon>
@@ -19,6 +28,8 @@
         bad-btn-ico
         ico-sm
         color="green"
+        role="button"
+        aria-label="Change enrollee to inactive"
         (click)="toggleActive(state.enrollee)"
         *ngIf="!state.locked"
       >
@@ -31,6 +42,8 @@
         bad-btn-ico
         ico-sm
         color="gray-500"
+        role="button"
+        aria-label="Change enrollee to active"
         (click)="toggleActive(state.enrollee)"
         *ngIf="!state.locked"
       >
@@ -45,6 +58,8 @@
         bad-btn-ico
         ico-xs
         color="orange"
+        role="button"
+        aria-label="Copy Identifier"
         [badCopyable]="state.enrollee.id"
       >
         <svg-icon src="assets/svg/copy.svg"></svg-icon>
@@ -60,6 +75,7 @@
       [locked]="state.locked"
       [formControl]="name"
       [badControlBind]="state.enrollee.name"
+      aria-label="Name"
     ></bad-lockable-input>
     <div class="dob">
       <span>MM/DD/YYYY</span>

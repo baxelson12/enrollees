@@ -1,7 +1,11 @@
 <bad-toolbar>
   <ng-container left>
     <form [formGroup]="form">
-      <bad-input formControlName="test" placeholder="Press '/' to search">
+      <bad-input
+        aria-label="Search"
+        formControlName="test"
+        placeholder="Press '/' to search"
+      >
         <svg-icon src="assets/svg/search.svg"></svg-icon>
       </bad-input>
     </form>
