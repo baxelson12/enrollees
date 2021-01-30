@@ -18,7 +18,5 @@ export class AppComponent {
     Selectors.selectedEnrollee
   );
 
-  constructor(private store: Store) {
-    this.selected$.subscribe(console.log);
-  }
+  constructor(private store: Store) {}
 }

@@ -1,6 +1,7 @@
-<div class="wrapper">
+<div class="wrapper" #wrapper>
   <app-enrollee
     *ngFor="let enrollee of enrollees$ | async"
     [enrollee]="enrollee"
+    [locked]="!((selectedEnrollee$ | async) === enrollee.id)"
   ></app-enrollee>
 </div>

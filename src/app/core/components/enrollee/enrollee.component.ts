@@ -1,9 +1,13 @@
-import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
-import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { LockableInputComponent } from '../../../shared/components/lockable-input/lockable-input.component';
 import { Enrollee } from '../../interfaces/enrollee';
+
+import * as Actions from '../../../store/actions';
+import { map, take } from 'rxjs/operators';
 
 interface State {
   enrollee: Enrollee;
@@ -21,40 +25,52 @@ const initial: State = {
   styleUrls: ['./enrollee.component.scss'],
   providers: [ComponentStore]
 })
-export class EnrolleeComponent implements OnDestroy {
+export class EnrolleeComponent implements AfterViewInit {
   // To allow focusing
   @ViewChild('input') input: LockableInputComponent;
   // Get state
-  state$: Observable<State> = this.store.select((s) => s);
-  // For cleanup
-  subscription: Subscription;
+  state$: Observable<State> = this.cs.select((s) => s);
   // Enrollee to be passed down from parent
   @Input() set enrollee(enrollee: Enrollee) {
-    this.store.patchState({ enrollee });
+    this.cs.patchState({ enrollee });
+  }
+  @Input() set locked(locked: boolean) {
+    this.cs.patchState({ locked });
   }
   // For the input
   name = new FormControl('', [Validators.required]);
-  constructor(private store: ComponentStore<State>) {
-    this.store.setState(initial);
+  constructor(private cs: ComponentStore<State>, private store: Store) {
+    this.cs.setState(initial);
   }
+  // Focus the active input
+  ngAfterViewInit(): void {
+    this.state$
+      .pipe(
+        take(5),
+        map((s) => s.locked)
+      )
+      .subscribe((locked) => {
+        if (!locked) {
+          this.input.focus();
+        }
+      });
+  }
+
   // Allow editing
   unlock(): void {
-    this.store.patchState({ locked: false });
+    this.cs.patchState({ locked: false });
     this.input.focus();
   }
   // Lock editing, notify parent
   save(old: Enrollee): void {
-    const enrollee = { ...old, name: this.name.value };
-    this.store.patchState({ locked: true, enrollee });
+    const enrollee: Enrollee = { ...old, name: this.name.value };
+    this.store.dispatch(Actions.patchEnrollee({ enrollee }));
+    this.store.dispatch(Actions.deselectEnrollee());
+    this.cs.patchState({ locked: true });
   }
   // Change active state
-  toggleActive(old: Enrollee) {
+  toggleActive(old: Enrollee): void {
     const enrollee: Enrollee = { ...old, active: !old.active };
-    this.store.patchState({ enrollee });
-  }
-
-  // Cleanup
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.cs.patchState({ enrollee });
   }
 }

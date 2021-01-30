@@ -1,5 +1,6 @@
-@import 'mixins';
+@import 'variables', 'mixins';
 
+// I could use grid... but IE
 .wrapper {
   display: flex;
   flex-flow: row wrap;
@@ -8,12 +9,6 @@
 
   @include lg() {
     justify-content: space-between;
-
-    &::after {
-      content: '';
-      flex: 0 0 326px;
-      max-width: 326px;
-    }
   }
 }
 

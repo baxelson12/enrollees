@@ -1,5 +1,7 @@
 @import 'variables', 'mixins';
 
+$section-width: 33.33%;
+
 .toolbar {
   display: flex;
   align-items: center;
@@ -19,6 +21,10 @@
 
   & > .section:first-child {
     justify-content: flex-start;
+    width: 75%;
+    @include md() {
+      width: $section-width;
+    }
   }
 
   & > .section:last-child {
@@ -27,5 +33,5 @@
 }
 
 .section {
-  width: 33.33%;
+  width: $section-width;
 }

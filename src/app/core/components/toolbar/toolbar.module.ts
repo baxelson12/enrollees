@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BadToolbarModule } from '../../../shared/components/toolbar/toolbar.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { BadInputModule } from '../../../shared/components/input/input.module';
+import { BadButtonModule } from '../../../shared/components/button/button.module';
 
 @NgModule({
   declarations: [ToolbarComponent],
@@ -13,6 +14,7 @@ import { BadInputModule } from '../../../shared/components/input/input.module';
     ReactiveFormsModule,
     BadToolbarModule,
     BadInputModule,
+    BadButtonModule,
     AngularSvgIconModule
   ],
   exports: [ToolbarComponent]

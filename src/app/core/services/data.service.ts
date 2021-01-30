@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Update } from '@ngrx/entity';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Enrollee } from '../interfaces/enrollee';
 
@@ -20,8 +22,11 @@ export class DataService {
     return this.http.get<Enrollee>(url);
   }
   // Update one
-  put(enrollee: Enrollee): Observable<Enrollee> {
+  put(enrollee: Partial<Enrollee>): Observable<Update<Enrollee>> {
     const url = `${environment.api}/enrollees/${enrollee.id}`;
-    return this.http.put<Enrollee>(url, enrollee);
+    const { id, ...dto } = enrollee;
+    return this.http
+      .put<Partial<Enrollee>>(url, dto)
+      .pipe(map((res) => ({ id: res.id, changes: res })));
   }
 }
