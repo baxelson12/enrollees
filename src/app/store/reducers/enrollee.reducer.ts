@@ -48,7 +48,7 @@ const enrolleeReducer = createReducer(
   // Deselect enrollee
   on(EnrolleeActions.deselectEnrollee, (state) => ({
     ...state,
-    selectEnrolleeId: null
+    selectedEnrolleeId: ''
   })),
   // Patch enrollee
   on(EnrolleeActions.patchEnrolleeSuccess, (state, { enrollee }) => {
