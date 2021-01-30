@@ -55,9 +55,12 @@
       [formControl]="name"
       [badControlBind]="state.enrollee.name"
     ></bad-lockable-input>
-    <div class="dob" *ngIf="state.enrollee.dateOfBirth">
+    <div class="dob">
       <span>MM/DD/YYYY</span>
-      <span>{{ state.enrollee.dateOfBirth }}</span>
+      <span *ngIf="state.enrollee.dateOfBirth">{{
+        state.enrollee.dateOfBirth
+      }}</span>
+      <span *ngIf="!state.enrollee.dateOfBirth">N/A</span>
     </div>
   </ng-container>
 </bad-card>
