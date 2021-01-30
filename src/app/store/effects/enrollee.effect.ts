@@ -13,6 +13,7 @@ import * as EnrolleeActions from '../actions/enrollee.actions';
 import * as Selectors from '../selectors';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class EnrolleeEffects {
@@ -39,7 +40,10 @@ export class EnrolleeEffects {
       ofType(EnrolleeActions.patchEnrollee),
       concatMap(({ enrollee }) =>
         this.ds.put(enrollee).pipe(
-          map((enrollee) => EnrolleeActions.patchEnrolleeSuccess({ enrollee })),
+          map((enrollee) => {
+            this.r.navigate(['..']);
+            return EnrolleeActions.patchEnrolleeSuccess({ enrollee });
+          }),
           catchError((e) => of(EnrolleeActions.patchEnrolleeFail()))
         )
       )
@@ -70,6 +74,7 @@ export class EnrolleeEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private ds: DataService
+    private ds: DataService,
+    private r: Router
   ) {}
 }
