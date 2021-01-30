@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  OnDestroy,
-  ViewChild
-} from '@angular/core';
+import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable, Subscription } from 'rxjs';
@@ -28,29 +22,32 @@ const initial: State = {
   providers: [ComponentStore]
 })
 export class EnrolleeComponent implements OnDestroy {
+  // To allow focusing
   @ViewChild('input') input: LockableInputComponent;
-
+  // Get state
   state$: Observable<State> = this.store.select((s) => s);
   // For cleanup
   subscription: Subscription;
+  // Enrollee to be passed down from parent
   @Input() set enrollee(enrollee: Enrollee) {
     this.store.patchState({ enrollee });
   }
+  // For the input
   name = new FormControl('', [Validators.required]);
   constructor(private store: ComponentStore<State>) {
     this.store.setState(initial);
   }
-
+  // Allow editing
   unlock(): void {
     this.store.patchState({ locked: false });
     this.input.focus();
   }
-
+  // Lock editing, notify parent
   save(old: Enrollee): void {
     const enrollee = { ...old, name: this.name.value };
     this.store.patchState({ locked: true, enrollee });
   }
-
+  // Change active state
   toggleActive(old: Enrollee) {
     const enrollee: Enrollee = { ...old, active: !old.active };
     this.store.patchState({ enrollee });

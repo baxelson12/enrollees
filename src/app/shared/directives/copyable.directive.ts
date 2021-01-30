@@ -5,8 +5,10 @@ import { Clipboard } from '@angular/cdk/clipboard';
   selector: '[badCopyable]'
 })
 export class CopyableDirective {
+  // Get copy value from parent
   @Input('badCopyable') value: string;
 
+  // Watch for clicks
   @HostListener('click') onClick() {
     this.clippy.copy(this.value);
   }

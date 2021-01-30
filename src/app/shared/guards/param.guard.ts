@@ -7,8 +7,8 @@ import {
   Router
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import * as Selectors from '../../store/selectors';
 
 @Injectable({
@@ -23,6 +23,7 @@ export class ParamGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    // If the id exists in store, we can continue navigating
     return this.store
       .select(Selectors.selectedEnrollee)
       .pipe(

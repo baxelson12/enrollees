@@ -32,11 +32,15 @@ const initial: State = {
   ]
 })
 export class LockableInputComponent extends BaseControlValueAccessor {
+  // For focusing
   @ViewChild('input') input: ElementRef;
+  // Select state
   state$: Observable<State> = this.store.select((s) => s);
+  // Pertaining to angular form control
   @Input('value') _value = '';
   @Input('input-type') inputType = 'text';
   @Input('aria-label') ariaLabel: string;
+  // Get locked state from parent
   @Input() set locked(locked: boolean) {
     this.store.patchState({ locked });
   }
@@ -46,6 +50,7 @@ export class LockableInputComponent extends BaseControlValueAccessor {
     this.store.setState(initial);
   }
 
+  // Focus the input
   focus(): void {
     const input = this.input.nativeElement as HTMLInputElement;
     input.focus();

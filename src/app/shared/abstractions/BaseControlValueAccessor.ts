@@ -1,5 +1,6 @@
 import { ControlValueAccessor } from '@angular/forms';
 
+// Basically just the hooks for an angular form control
 export abstract class BaseControlValueAccessor implements ControlValueAccessor {
   // tslint:disable-next-line: variable-name
   abstract _value: any;
