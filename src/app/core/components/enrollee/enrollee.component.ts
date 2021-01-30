@@ -1,7 +1,7 @@
-import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LockableInputComponent } from '../../../shared/components/lockable-input/lockable-input.component';
 import { Enrollee } from '../../interfaces/enrollee';
 
@@ -21,13 +21,11 @@ const initial: State = {
   styleUrls: ['./enrollee.component.scss'],
   providers: [ComponentStore]
 })
-export class EnrolleeComponent implements OnDestroy {
+export class EnrolleeComponent {
   // To allow focusing
   @ViewChild('input') input: LockableInputComponent;
   // Get state
   state$: Observable<State> = this.store.select((s) => s);
-  // For cleanup
-  subscription: Subscription;
   // Enrollee to be passed down from parent
   @Input() set enrollee(enrollee: Enrollee) {
     this.store.patchState({ enrollee });
@@ -51,10 +49,5 @@ export class EnrolleeComponent implements OnDestroy {
   toggleActive(old: Enrollee) {
     const enrollee: Enrollee = { ...old, active: !old.active };
     this.store.patchState({ enrollee });
-  }
-
-  // Cleanup
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
