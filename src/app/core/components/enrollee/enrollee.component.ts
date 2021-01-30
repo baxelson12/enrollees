@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
@@ -7,7 +7,7 @@ import { LockableInputComponent } from '../../../shared/components/lockable-inpu
 import { Enrollee } from '../../interfaces/enrollee';
 
 import * as Actions from '../../../store/actions';
-import { Update } from '@ngrx/entity';
+import { map, take } from 'rxjs/operators';
 
 interface State {
   enrollee: Enrollee;
@@ -25,7 +25,7 @@ const initial: State = {
   styleUrls: ['./enrollee.component.scss'],
   providers: [ComponentStore]
 })
-export class EnrolleeComponent {
+export class EnrolleeComponent implements AfterViewInit {
   // To allow focusing
   @ViewChild('input') input: LockableInputComponent;
   // Get state
@@ -34,11 +34,29 @@ export class EnrolleeComponent {
   @Input() set enrollee(enrollee: Enrollee) {
     this.cs.patchState({ enrollee });
   }
+  @Input() set locked(locked: boolean) {
+    console.log(locked);
+    this.cs.patchState({ locked });
+  }
   // For the input
   name = new FormControl('', [Validators.required]);
   constructor(private cs: ComponentStore<State>, private store: Store) {
     this.cs.setState(initial);
   }
+  // Focus the active input
+  ngAfterViewInit(): void {
+    this.state$
+      .pipe(
+        take(5),
+        map((s) => s.locked)
+      )
+      .subscribe((locked) => {
+        if (!locked) {
+          this.input.focus();
+        }
+      });
+  }
+
   // Allow editing
   unlock(): void {
     this.cs.patchState({ locked: false });
@@ -48,9 +66,11 @@ export class EnrolleeComponent {
   save(old: Enrollee): void {
     const enrollee: Enrollee = { ...old, name: this.name.value };
     this.store.dispatch(Actions.patchEnrollee({ enrollee }));
+    this.store.dispatch(Actions.deselectEnrollee());
+    this.cs.patchState({ locked: true });
   }
   // Change active state
-  toggleActive(old: Enrollee) {
+  toggleActive(old: Enrollee): void {
     const enrollee: Enrollee = { ...old, active: !old.active };
     this.cs.patchState({ enrollee });
   }

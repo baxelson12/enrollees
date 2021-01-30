@@ -2,5 +2,6 @@
   <app-enrollee
     *ngFor="let enrollee of enrollees$ | async"
     [enrollee]="enrollee"
+    [locked]="!((selectedEnrollee$ | async) === enrollee.id)"
   ></app-enrollee>
 </div>

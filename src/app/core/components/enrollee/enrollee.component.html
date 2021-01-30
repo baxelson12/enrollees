@@ -1,15 +1,15 @@
 <bad-card *ngIf="state$ | async as state">
   <ng-container top>
-    <button
+    <a
       *ngIf="state.locked"
+      [routerLink]="['/enrollees', state.enrollee.id]"
       bad-btn-ico
       ico-sm
       role="button"
       aria-label="Edit"
-      (click)="unlock()"
     >
       <svg-icon src="assets/svg/edit.svg"></svg-icon>
-    </button>
+    </a>
     <button
       *ngIf="!state.locked"
       bad-btn-ico

@@ -7,6 +7,7 @@ import { BadButtonModule } from '../../../shared/components/button/button.module
 import { BadLockableInputModule } from '../../../shared/components/lockable-input/lockable-input.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BadDirectivesModule } from '../../../shared/directives/directives.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [EnrolleeComponent],
@@ -17,7 +18,8 @@ import { BadDirectivesModule } from '../../../shared/directives/directives.modul
     BadButtonModule,
     BadLockableInputModule,
     AngularSvgIconModule,
-    BadDirectivesModule
+    BadDirectivesModule,
+    RouterModule
   ],
   exports: [EnrolleeComponent]
 })

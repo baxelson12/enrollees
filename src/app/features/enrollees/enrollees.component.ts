@@ -1,13 +1,7 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Renderer2,
-  ViewChild
-} from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { Enrollee } from '../../core/interfaces/enrollee';
 
 import * as Selectors from '../../store/selectors';
@@ -30,13 +24,20 @@ export class EnrolleesComponent {
     .pipe(
       tap((arr) => {
         // prettier-ignore
-        if (!this.wrapper) { return; }
+        if (!this.wrapper || !this.div) { return; }
         this.killGhosts();
         const len = arr.length;
         const cell = this.div.children[0] as HTMLDivElement;
 
         this.createGhosts(this.div.offsetWidth, len, cell.offsetWidth);
       })
+    );
+
+  selectedEnrollee$: Observable<string> = this.store
+    .select(Selectors.selectedEnrollee)
+    .pipe(
+      map((enrollee) => (enrollee ? enrollee.id : false)),
+      tap(console.log)
     );
 
   constructor(private store: Store, private r: Renderer2) {}
