@@ -8,7 +8,9 @@ import { InputComponent } from '../../../shared/components/input/input.component
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
+  // For focusing
   @ViewChild('input') input: InputComponent;
+  // Watch for slashes
   @HostListener('document:keydown', ['$event'])
   handleKeypress(e: KeyboardEvent) {
     if (e.code === 'Slash' && e.composedPath().length < 6) {
@@ -16,6 +18,7 @@ export class ToolbarComponent {
       this.input.focus();
     }
   }
+  // Search form
   form = this.fb.group({
     search: this.fb.control('')
   });
