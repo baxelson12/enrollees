@@ -35,6 +35,16 @@ h2 {
   font-size: 0.875rem;
 }
 
+.dob-wrapper {
+  display: flex;
+  align-items: flex-end;
+  & > label {
+    font-size: 0.5rem;
+    font-weight: 400;
+    padding: 0.1rem;
+  }
+}
+
 .dob {
   display: flex;
   flex-direction: column;
