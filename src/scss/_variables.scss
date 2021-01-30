@@ -1,3 +1,5 @@
+//
+// Responsive
 $screen-sm-min: 640px;
 $screen-md-min: 768px;
 $screen-lg-min: 1024px;
@@ -5,3 +7,37 @@ $screen-xl-min: 1280px;
 
 $body-margin-sm: 1.5rem;
 $body-margin-lg: 3.125rem;
+
+//
+// Colors
+$black: #1a202c;
+$white: #fff;
+
+$gray-100: #f7fafc;
+$gray-200: #edf2f7;
+$gray-300: #e2e8f0;
+$gray-400: #a0aec0;
+$gray-500: #718096;
+
+$blue-100: #3182ce;
+$blue-200: #2b6cb0;
+
+$green: #38a169;
+
+$orange: #d69e2e;
+
+//
+// Icon sizes
+$ico-base: 1.25rem;
+$ico-sm: 1rem;
+$ico-xs: 0.625rem;
+
+//
+// Shadow
+$shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+//
+// Radius
+$radius: 0.25rem;

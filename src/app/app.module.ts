@@ -12,6 +12,14 @@ import { effects } from './store/effects';
 import { reducers } from './store/reducers';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ParamSerializer } from './store/serializers/param.serializer';
+import { BadButtonModule } from './shared/components/button/button.module';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { BadCardModule } from './shared/components/card/card.module';
+import { BadNavModule } from './shared/components/nav/nav.module';
+import { BadToolbarModule } from './shared/components/toolbar/toolbar.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BadInputModule } from './shared/components/input/input.module';
+import { ToolbarModule } from './core/components/toolbar/toolbar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +35,15 @@ import { ParamSerializer } from './store/serializers/param.serializer';
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot({
       serializer: ParamSerializer
-    })
+    }),
+    AngularSvgIconModule.forRoot(),
+    BadButtonModule,
+    BadCardModule,
+    BadNavModule,
+    BadToolbarModule,
+    ReactiveFormsModule,
+    BadInputModule,
+    ToolbarModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

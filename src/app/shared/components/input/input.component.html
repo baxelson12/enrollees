@@ -1,0 +1,12 @@
+<div class="input-wrapper" (click)="input.focus()">
+  <ng-content></ng-content>
+  <input
+    #input
+    (input)="onChange($event.target.value)"
+    (blur)="onTouched($event.target.value)"
+    [type]="inputType"
+    [placeholder]="placeholder"
+    [attr.aria-label]="ariaLabel"
+    [value]="value"
+  />
+</div>

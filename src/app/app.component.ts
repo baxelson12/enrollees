@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Enrollee } from './core/interfaces/enrollee';
 
 import * as Selectors from './store/selectors';
-import * as Actions from './store/actions';
 
 @Component({
   selector: 'app-root',

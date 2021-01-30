@@ -1,0 +1,49 @@
+@import 'variables', 'mixins';
+
+$card-padding: 0.5rem;
+$mid-padding: (
+  'x': calc(1.5rem - #{$card-padding}),
+  'y': 1.25rem
+);
+$bottom-padding: (
+  'x': calc(1.5rem - #{$card-padding}),
+  'y': 0.25rem
+);
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: $card-padding;
+  width: 100%;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  overflow: hidden;
+  text-transform: uppercase;
+  background-color: $white;
+  @include sm() {
+    width: 326px;
+  }
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.middle {
+  @include flex-center();
+  flex-direction: column;
+  align-items: flex-start;
+  padding: map-get($mid-padding, 'y') map-get($mid-padding, 'x');
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 -#{$card-padding} -#{$card-padding} -#{$card-padding};
+  padding: map-get($bottom-padding, 'y') map-get($bottom-padding, 'x');
+  background-color: $blue-200;
+  color: $gray-100;
+}

@@ -1,1 +1,6 @@
-<p>enrollees works!</p>
+<div class="wrapper">
+  <app-enrollee
+    *ngFor="let enrollee of enrollees$ | async"
+    [enrollee]="enrollee"
+  ></app-enrollee>
+</div>

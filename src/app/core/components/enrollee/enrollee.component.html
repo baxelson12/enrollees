@@ -1,0 +1,91 @@
+<bad-card *ngIf="state$ | async as state">
+  <ng-container top>
+    <button
+      *ngIf="state.locked"
+      bad-btn-ico
+      ico-sm
+      role="button"
+      aria-label="Edit"
+      (click)="unlock()"
+    >
+      <svg-icon src="assets/svg/edit.svg"></svg-icon>
+    </button>
+    <button
+      *ngIf="!state.locked"
+      bad-btn-ico
+      ico-sm
+      color="green"
+      role="button"
+      aria-label="Save"
+      (click)="save(state.enrollee)"
+    >
+      <svg-icon src="assets/svg/save.svg"></svg-icon>
+    </button>
+
+    <div *ngIf="state.enrollee.active" class="active">
+      <span>Active</span>
+      <button
+        bad-btn-ico
+        ico-sm
+        color="green"
+        role="button"
+        aria-label="Change enrollee to inactive"
+        (click)="toggleActive(state.enrollee)"
+        *ngIf="!state.locked"
+      >
+        <svg-icon src="assets/svg/power.svg"></svg-icon>
+      </button>
+    </div>
+    <div *ngIf="!state.enrollee.active" class="inactive">
+      <span>Inactive</span>
+      <button
+        bad-btn-ico
+        ico-sm
+        color="gray-500"
+        role="button"
+        aria-label="Change enrollee to active"
+        (click)="toggleActive(state.enrollee)"
+        *ngIf="!state.locked"
+      >
+        <svg-icon src="assets/svg/power.svg"></svg-icon>
+      </button>
+    </div>
+  </ng-container>
+  <ng-container middle>
+    <div class="title">
+      <span [badCopyable]="state.enrollee.id">Identifier</span>
+      <button
+        bad-btn-ico
+        ico-xs
+        color="orange"
+        role="button"
+        aria-label="Copy Identifier"
+        [badCopyable]="state.enrollee.id"
+      >
+        <svg-icon src="assets/svg/copy.svg"></svg-icon>
+      </button>
+    </div>
+    <div class="id">
+      <span [badCopyable]="state.enrollee.id"> {{ state.enrollee.id }} </span>
+    </div>
+  </ng-container>
+  <ng-container bottom>
+    <bad-lockable-input
+      #input
+      [locked]="state.locked"
+      [formControl]="name"
+      [badControlBind]="state.enrollee.name"
+      aria-label="Name"
+    ></bad-lockable-input>
+    <div class="dob-wrapper">
+      <label>DOB</label>
+      <div class="dob">
+        <span>MM/DD/YYYY</span>
+        <span *ngIf="state.enrollee.dateOfBirth">{{
+          state.enrollee.dateOfBirth
+        }}</span>
+        <span *ngIf="!state.enrollee.dateOfBirth">N/A</span>
+      </div>
+    </div>
+  </ng-container>
+</bad-card>

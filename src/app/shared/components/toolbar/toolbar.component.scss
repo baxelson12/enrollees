@@ -1,0 +1,31 @@
+@import 'variables', 'mixins';
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem $body-margin-sm;
+  margin: 0 -#{$body-margin-sm};
+  background-color: $white;
+
+  @include sm() {
+    margin: 0 -#{$body-margin-lg};
+    padding: 0.5rem $body-margin-lg;
+  }
+
+  & > .section {
+    @include flex-center();
+  }
+
+  & > .section:first-child {
+    justify-content: flex-start;
+  }
+
+  & > .section:last-child {
+    justify-content: flex-end;
+  }
+}
+
+.section {
+  width: 33.33%;
+}

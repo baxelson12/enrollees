@@ -10,6 +10,7 @@ body {
 
 body {
   margin: 0 $body-margin-sm;
+  background-color: $gray-200;
   @include sm() {
     margin: 0 $body-margin-lg;
   }
@@ -17,5 +18,14 @@ body {
 
 button,
 input {
+  all: unset;
+}
+
+svg-icon {
+  display: flex;
+}
+
+h1,
+h2 {
   all: unset;
 }

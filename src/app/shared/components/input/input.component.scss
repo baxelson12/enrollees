@@ -1,0 +1,28 @@
+@import 'variables', 'mixins';
+
+.input-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.625rem;
+  border: 1px solid $gray-300;
+  border-radius: $radius;
+  color: $gray-400;
+  cursor: text;
+
+  & ::ng-deep svg-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  & > input {
+    font-size: 1rem;
+    font-weight: 400;
+    flex-grow: 1;
+  }
+
+  & > input:focus {
+    color: $black;
+  }
+}
