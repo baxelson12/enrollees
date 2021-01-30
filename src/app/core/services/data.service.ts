@@ -24,9 +24,8 @@ export class DataService {
   // Update one
   put(enrollee: Partial<Enrollee>): Observable<Update<Enrollee>> {
     const url = `${environment.api}/enrollees/${enrollee.id}`;
-    const { id, ...dto } = enrollee;
     return this.http
-      .put<Partial<Enrollee>>(url, dto)
+      .put<Partial<Enrollee>>(url, enrollee)
       .pipe(map((res) => ({ id: res.id, changes: res })));
   }
 }

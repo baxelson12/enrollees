@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -20,6 +20,7 @@ import { BadToolbarModule } from './shared/components/toolbar/toolbar.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BadInputModule } from './shared/components/input/input.module';
 import { ToolbarModule } from './core/components/toolbar/toolbar.module';
+import { IdInterceptor } from './shared/interceptors/id.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,7 +46,14 @@ import { ToolbarModule } from './core/components/toolbar/toolbar.module';
     BadInputModule,
     ToolbarModule
   ],
-  providers: [DataService],
+  providers: [
+    DataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: IdInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
