@@ -2,8 +2,9 @@
   <ng-container left>
     <form [formGroup]="form">
       <bad-input
+        #input
         aria-label="Search"
-        formControlName="test"
+        formControlName="search"
         placeholder="Press '/' to search"
       >
         <svg-icon src="assets/svg/search.svg"></svg-icon>
