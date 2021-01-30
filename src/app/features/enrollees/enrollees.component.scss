@@ -1,0 +1,23 @@
+@import 'mixins';
+
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.25rem;
+  justify-content: center;
+
+  @include lg() {
+    justify-content: space-between;
+
+    &::after {
+      content: '';
+      flex: 0 0 326px;
+      max-width: 326px;
+    }
+  }
+}
+
+app-enrollee:nth-child(4n) {
+  page-break-after: always;
+  break-after: always;
+}
