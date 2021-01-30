@@ -1,9 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Enrollee } from '../../core/interfaces/enrollee';
 
 import * as Selectors from '../../store/selectors';
+
+const GAP = 20;
 
 @Component({
   selector: 'app-enrollees',
@@ -11,9 +20,56 @@ import * as Selectors from '../../store/selectors';
   styleUrls: ['./enrollees.component.scss']
 })
 export class EnrolleesComponent {
-  enrollees$: Observable<Enrollee[]> = this.store.select(
-    Selectors.filterEnrollees
-  );
+  @ViewChild('wrapper') wrapper: ElementRef;
+  get div(): HTMLDivElement {
+    return this.wrapper.nativeElement;
+  }
 
-  constructor(private store: Store) {}
+  enrollees$: Observable<Enrollee[]> = this.store
+    .select(Selectors.filterEnrollees)
+    .pipe(
+      tap((arr) => {
+        // prettier-ignore
+        if (!this.wrapper) { return; }
+        this.killGhosts();
+        const len = arr.length;
+        const cell = this.div.children[0] as HTMLDivElement;
+
+        this.createGhosts(this.div.offsetWidth, len, cell.offsetWidth);
+      })
+    );
+
+  constructor(private store: Store, private r: Renderer2) {}
+
+  // Fill the empty spots in last flex row
+  private createGhosts(
+    containerWidth: number,
+    cellCount: number,
+    cellWidth: number,
+    gap: number = GAP
+  ): void {
+    // prettier-ignore
+    if (!cellCount) { return; }
+    const rowLen = Math.floor(containerWidth / cellWidth);
+    const remainder = cellCount % rowLen;
+    const ghostCount = rowLen - remainder;
+    console.log(rowLen, remainder, ghostCount);
+    // prettier-ignore
+    if (!remainder) { return; }
+    // Create ghosts
+    for (let i = 0; i < ghostCount; i++) {
+      const ghost: HTMLDivElement = this.r.createElement('div');
+      this.r.setAttribute(ghost, 'class', 'ghost');
+      this.r.setStyle(ghost, 'width', `${cellWidth}px`);
+      this.r.appendChild(this.div, ghost);
+    }
+  }
+
+  // Remove in order to rebuild
+  private killGhosts(): void {
+    const children = this.div.children;
+    Array.from(children)
+      .filter((child) => child.classList.contains('ghost'))
+      .forEach((ghost) => this.r.removeChild(this.div, ghost));
+  }
 }
