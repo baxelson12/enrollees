@@ -10,6 +10,7 @@ export interface State extends EntityState<Enrollee> {
   loading: boolean;
   loaded: boolean;
   sortBy: any;
+  query: string;
 }
 
 // Get selected enrollee ID
@@ -27,7 +28,8 @@ export const initialState: State = adapter.getInitialState({
   selectedEnrolleeId: null,
   sortBy: 'nameDesc',
   loading: true,
-  loaded: false
+  loaded: false,
+  query: ''
 });
 
 // Actual reducer
@@ -49,7 +51,9 @@ const enrolleeReducer = createReducer(
     selectEnrolleeId: null
   })),
   // Change sort
-  on(EnrolleeActions.sortBy, (state, { sortBy }) => ({ ...state, sortBy }))
+  on(EnrolleeActions.sortBy, (state, { sortBy }) => ({ ...state, sortBy })),
+  // Change query
+  on(EnrolleeActions.queryBy, (state, { query }) => ({ ...state, query }))
 );
 
 export function reducer(state: State | undefined, action: Action): State {

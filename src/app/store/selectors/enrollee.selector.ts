@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Enrollee } from '../../core/interfaces/enrollee';
 import * as FromReducer from '../reducers/enrollee.reducer';
 
 export const selectEnrolleeState = createFeatureSelector<FromReducer.State>(
@@ -27,4 +28,12 @@ export const selectEnrolleeEntities = createSelector(
 export const selectedEnrollee = createSelector(
   selectEnrolleeState,
   (state: FromReducer.State) => state.entities[state.selectedEnrolleeId]
+);
+
+// Filter by query
+export const filterEnrollees = createSelector(
+  selectAllEnrollees,
+  selectEnrolleeState,
+  (arr: Enrollee[], state: FromReducer.State) =>
+    arr.filter((v) => v.name.toLowerCase().includes(state.query.toLowerCase()))
 );

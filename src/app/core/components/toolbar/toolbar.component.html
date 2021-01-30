@@ -1,10 +1,10 @@
 <bad-toolbar>
   <ng-container left>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="search()">
       <bad-input
         #input
         aria-label="Search"
-        formControlName="search"
+        formControlName="query"
         placeholder="Press '/' to search"
       >
         <svg-icon src="assets/svg/search.svg"></svg-icon>

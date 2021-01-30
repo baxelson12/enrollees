@@ -1,13 +1,17 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { InputComponent } from '../../../shared/components/input/input.component';
+
+import * as Actions from '../../../store/actions';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnDestroy {
   // For focusing
   @ViewChild('input') input: InputComponent;
   // Watch for slashes
@@ -18,10 +22,21 @@ export class ToolbarComponent {
       this.input.focus();
     }
   }
+  // For cleanup
+  subscription: Subscription;
   // Search form
   form = this.fb.group({
-    search: this.fb.control('')
+    query: this.fb.control('')
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store) {
+    this.subscription = this.form.valueChanges.subscribe(({ query }) =>
+      this.store.dispatch(Actions.queryBy({ query }))
+    );
+  }
+
+  // Cleanup
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

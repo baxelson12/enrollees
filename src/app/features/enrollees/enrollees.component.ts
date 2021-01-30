@@ -12,7 +12,7 @@ import * as Selectors from '../../store/selectors';
 })
 export class EnrolleesComponent {
   enrollees$: Observable<Enrollee[]> = this.store.select(
-    Selectors.selectAllEnrollees
+    Selectors.filterEnrollees
   );
 
   constructor(private store: Store) {}
