@@ -35,13 +35,14 @@ export class LockableInputComponent extends BaseControlValueAccessor {
   @ViewChild('input') input: ElementRef;
   state$: Observable<State> = this.store.select((s) => s);
   @Input('value') _value = '';
+  @Input('input-type') inputType = 'text';
+  @Input('aria-label') ariaLabel: string;
   @Input() set locked(locked: boolean) {
     this.store.patchState({ locked });
   }
 
   constructor(private store: ComponentStore<State>) {
     super();
-    console.log('running');
     this.store.setState(initial);
   }
 
