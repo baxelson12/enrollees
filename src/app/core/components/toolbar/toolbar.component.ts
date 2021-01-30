@@ -14,20 +14,20 @@ import * as Actions from '../../../store/actions';
 export class ToolbarComponent implements OnDestroy {
   // For focusing
   @ViewChild('input') input: InputComponent;
-  // Watch for slashes
-  @HostListener('document:keydown', ['$event'])
-  handleKeypress(e: KeyboardEvent) {
-    if (e.code === 'Slash' && e.composedPath().length < 6) {
-      e.preventDefault();
-      this.input.focus();
-    }
-  }
   // For cleanup
   subscription: Subscription;
   // Search form
   form = this.fb.group({
     query: this.fb.control('')
   });
+  // Watch for slashes
+  @HostListener('document:keydown', ['$event'])
+  handleKeypress(e: KeyboardEvent): void {
+    if (e.code === 'Slash' && e.composedPath().length < 6) {
+      e.preventDefault();
+      this.input.focus();
+    }
+  }
 
   constructor(private fb: FormBuilder, private store: Store) {
     this.subscription = this.form.valueChanges.subscribe(({ query }) =>

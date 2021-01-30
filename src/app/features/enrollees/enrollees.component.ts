@@ -1,11 +1,11 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Enrollee } from '../../core/interfaces/enrollee';
 
 import * as Selectors from '../../store/selectors';
-
+// Spacing between cells
 const GAP = 20;
 
 @Component({
@@ -22,6 +22,8 @@ export class EnrolleesComponent {
   enrollees$: Observable<Enrollee[]> = this.store
     .select(Selectors.filterEnrollees)
     .pipe(
+      // Once we have items,
+      // We need to even out the grid
       tap((arr) => {
         // prettier-ignore
         if (!this.wrapper || !this.div) { return; }
@@ -35,10 +37,7 @@ export class EnrolleesComponent {
 
   selectedEnrollee$: Observable<string> = this.store
     .select(Selectors.selectedEnrollee)
-    .pipe(
-      map((enrollee) => (enrollee ? enrollee.id : false)),
-      tap(console.log)
-    );
+    .pipe(map((enrollee) => (enrollee ? enrollee.id : '')));
 
   constructor(private store: Store, private r: Renderer2) {}
 
@@ -54,7 +53,6 @@ export class EnrolleesComponent {
     const rowLen = Math.floor(containerWidth / cellWidth);
     const remainder = cellCount % rowLen;
     const ghostCount = rowLen - remainder;
-    console.log(rowLen, remainder, ghostCount);
     // prettier-ignore
     if (!remainder) { return; }
     // Create ghosts

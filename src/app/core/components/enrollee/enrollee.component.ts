@@ -35,7 +35,6 @@ export class EnrolleeComponent implements AfterViewInit {
     this.cs.patchState({ enrollee });
   }
   @Input() set locked(locked: boolean) {
-    console.log(locked);
     this.cs.patchState({ locked });
   }
   // For the input
