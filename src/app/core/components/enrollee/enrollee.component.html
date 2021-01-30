@@ -39,13 +39,18 @@
   </ng-container>
   <ng-container middle>
     <div class="title">
-      <span>Identifier</span>
-      <button bad-btn-ico ico-xs color="orange">
+      <span [badCopyable]="state.enrollee.id">Identifier</span>
+      <button
+        bad-btn-ico
+        ico-xs
+        color="orange"
+        [badCopyable]="state.enrollee.id"
+      >
         <svg-icon src="assets/svg/copy.svg"></svg-icon>
       </button>
     </div>
     <div class="id">
-      <span> {{ state.enrollee.id }} </span>
+      <span [badCopyable]="state.enrollee.id"> {{ state.enrollee.id }} </span>
     </div>
   </ng-container>
   <ng-container bottom>
