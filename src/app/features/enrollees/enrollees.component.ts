@@ -30,7 +30,8 @@ export class EnrolleesComponent {
         this.killGhosts();
         const len = arr.length;
         const cell = this.div.children[0] as HTMLDivElement;
-
+        // prettier-ignore
+        if (!cell.offsetWidth) { return; }
         this.createGhosts(this.div.offsetWidth, len, cell.offsetWidth);
       })
     );
