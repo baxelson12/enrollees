@@ -5,19 +5,20 @@ import {
   ofType,
   ROOT_EFFECTS_INIT
 } from '@ngrx/effects';
-import { map, concatMapTo } from 'rxjs/operators';
+import { map, concatMapTo, concatMap, catchError } from 'rxjs/operators';
 import { DataService } from '../../core/services/data.service';
 
 import * as FromRouter from '@ngrx/router-store';
 import * as EnrolleeActions from '../actions/enrollee.actions';
 import * as Selectors from '../selectors';
 import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
 
 @Injectable()
 export class EnrolleeEffects {
   // On initial app load or a dispatched load_enrollees
   // Get all
-  loadProducts$ = createEffect(() =>
+  loadEnrollees$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ROOT_EFFECTS_INIT || EnrolleeActions.LOAD_ENROLLEES),
       concatMapTo(
@@ -28,6 +29,19 @@ export class EnrolleeEffects {
               EnrolleeActions.loadEnrolleesSuccess({ enrollees })
             )
           )
+      )
+    )
+  );
+
+  // On patch
+  patchEnrollee$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EnrolleeActions.patchEnrollee),
+      concatMap(({ enrollee }) =>
+        this.ds.put(enrollee).pipe(
+          map((enrollee) => EnrolleeActions.patchEnrolleeSuccess({ enrollee })),
+          catchError((e) => of(EnrolleeActions.patchEnrolleeFail()))
+        )
       )
     )
   );

@@ -50,6 +50,10 @@ const enrolleeReducer = createReducer(
     ...state,
     selectEnrolleeId: null
   })),
+  // Patch enrollee
+  on(EnrolleeActions.patchEnrolleeSuccess, (state, { enrollee }) => {
+    return adapter.updateOne(enrollee, state);
+  }),
   // Change sort
   on(EnrolleeActions.sortBy, (state, { sortBy }) => ({ ...state, sortBy })),
   // Change query

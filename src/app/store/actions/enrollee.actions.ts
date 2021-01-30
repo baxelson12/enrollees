@@ -1,3 +1,4 @@
+import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { Enrollee } from '../../core/interfaces/enrollee';
 
@@ -11,6 +12,21 @@ export const loadEnrolleesFail = createAction(LOAD_ENROLLEES_FAIL);
 export const loadEnrolleesSuccess = createAction(
   LOAD_ENROLLEES_SUCCESS,
   props<{ enrollees: Enrollee[] }>()
+);
+
+// Patch enrollee
+export const PATCH_ENROLLEE = '[Enrollees] Patch enrollee.';
+export const PATCH_ENROLLEE_FAIL = '[Enrollees] Patch enrollee failed.';
+export const PATCH_ENROLLEE_SUCCESS = '[Enrollees] Patch enrollee success.';
+
+export const patchEnrollee = createAction(
+  PATCH_ENROLLEE,
+  props<{ enrollee: Enrollee }>()
+);
+export const patchEnrolleeFail = createAction(PATCH_ENROLLEE_FAIL);
+export const patchEnrolleeSuccess = createAction(
+  PATCH_ENROLLEE_SUCCESS,
+  props<{ enrollee: Update<Enrollee> }>()
 );
 
 // Select/deselect product in UI
