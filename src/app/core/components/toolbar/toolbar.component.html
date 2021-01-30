@@ -1,6 +1,6 @@
 <bad-toolbar>
   <ng-container left>
-    <form [formGroup]="form" (ngSubmit)="search()">
+    <form [formGroup]="form">
       <bad-input
         #input
         aria-label="Search"
@@ -11,5 +11,16 @@
       </bad-input>
     </form>
   </ng-container>
-  <ng-container right> Hello, end </ng-container>
+  <ng-container right *ngIf="sort$ | async as sortBy">
+    <button bad-btn-ico (click)="sort(sortBy)">
+      <svg-icon
+        *ngIf="sortBy === 'nameDesc'"
+        src="assets/svg/sortAsc.svg"
+      ></svg-icon>
+      <svg-icon
+        *ngIf="sortBy === 'nameAsc'"
+        src="assets/svg/sortDesc.svg"
+      ></svg-icon>
+    </button>
+  </ng-container>
 </bad-toolbar>

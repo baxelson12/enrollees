@@ -1,6 +1,7 @@
 import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { Enrollee } from '../../core/interfaces/enrollee';
+import { SortBy } from '../../shared/types/sortBy';
 
 // Get from DB
 export const LOAD_ENROLLEES = '[Enrollees] Load enrollees.';
@@ -41,7 +42,7 @@ export const deselectEnrollee = createAction(DESELECT_ENROLLEE);
 
 // Change sort
 export const SORT_BY = '[Enrollees] Change sort.';
-export const sortBy = createAction(SORT_BY, props<{ sortBy: any }>());
+export const sortBy = createAction(SORT_BY, props<{ sortBy: SortBy }>());
 
 // Query change
 export const QUERY_BY = '[Enrollees] Change query.';

@@ -20,7 +20,7 @@ export class EnrolleesComponent {
   }
 
   enrollees$: Observable<Enrollee[]> = this.store
-    .select(Selectors.filterEnrollees)
+    .select(Selectors.selectSortedEnrollees)
     .pipe(
       // Once we have items,
       // We need to even out the grid
