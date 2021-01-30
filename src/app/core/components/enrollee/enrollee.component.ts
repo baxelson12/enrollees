@@ -51,6 +51,11 @@ export class EnrolleeComponent implements OnDestroy {
     this.store.patchState({ locked: true, enrollee });
   }
 
+  toggleActive(old: Enrollee) {
+    const enrollee: Enrollee = { ...old, active: !old.active };
+    this.store.patchState({ enrollee });
+  }
+
   // Cleanup
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

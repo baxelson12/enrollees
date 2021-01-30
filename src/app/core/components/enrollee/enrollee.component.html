@@ -18,19 +18,19 @@
         bad-btn-ico
         ico-sm
         color="green"
-        (click)="toggleActive()"
+        (click)="toggleActive(state.enrollee)"
         *ngIf="!state.locked"
       >
         <svg-icon src="assets/svg/power.svg"></svg-icon>
       </button>
     </div>
-    <div *ngIf="!state.enrollee.active" class="active">
-      <span>Active</span>
+    <div *ngIf="!state.enrollee.active" class="inactive">
+      <span>Inactive</span>
       <button
         bad-btn-ico
         ico-sm
         color="gray-500"
-        (click)="toggleActive()"
+        (click)="toggleActive(state.enrollee)"
         *ngIf="!state.locked"
       >
         <svg-icon src="assets/svg/power.svg"></svg-icon>
