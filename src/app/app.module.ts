@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,7 @@ import { BadInputModule } from './shared/components/input/input.module';
 import { ToolbarModule } from './core/components/toolbar/toolbar.module';
 import { IdInterceptor } from './shared/interceptors/id.interceptor';
 import { storeFreeze } from 'ngrx-store-freeze';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export const metaReducers: MetaReducer<{}>[] = !environment.production
   ? [storeFreeze]
@@ -31,6 +33,7 @@ export const metaReducers: MetaReducer<{}>[] = !environment.production
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -49,7 +52,8 @@ export const metaReducers: MetaReducer<{}>[] = !environment.production
     BadToolbarModule,
     ReactiveFormsModule,
     BadInputModule,
-    ToolbarModule
+    ToolbarModule,
+    MatSnackBarModule
   ],
   providers: [
     DataService,
