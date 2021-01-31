@@ -3,6 +3,7 @@ import { Enrollee } from '../../core/interfaces/enrollee';
 import { SortAscending, SortDescending } from '../../shared/utils/sort';
 import * as FromReducer from '../reducers/enrollee.reducer';
 
+// State slice
 export const selectEnrolleeState = createFeatureSelector<FromReducer.State>(
   'enrollees'
 );

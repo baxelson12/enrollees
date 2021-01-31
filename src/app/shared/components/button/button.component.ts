@@ -18,6 +18,7 @@ export class ButtonComponent implements OnInit {
     this.hostElement.classList.add(val);
   }
   // Could use hostbinding instead
+  // could cause issues in an inherited class tho
   get hostElement(): HTMLElement {
     return this.elementRef.nativeElement;
   }

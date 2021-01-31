@@ -1,12 +1,10 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable } from 'rxjs';
-import { catchError, map, retry, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Enrollee } from '../../core/interfaces/enrollee';
 
 import * as Selectors from '../../store/selectors';
-// Spacing between cells
-const GAP = 20;
 
 @Component({
   selector: 'app-enrollees',
@@ -14,7 +12,9 @@ const GAP = 20;
   styleUrls: ['./enrollees.component.scss']
 })
 export class EnrolleesComponent {
+  // Get the container
   @ViewChild('wrapper') wrapper: ElementRef;
+  // Get div element of container
   get div(): HTMLDivElement {
     try {
       return this.wrapper.nativeElement;
@@ -25,6 +25,7 @@ export class EnrolleesComponent {
       );
     }
   }
+  // Get the grid cell width
   get cellWidth(): number {
     try {
       const cell = this.div.firstChild as HTMLDivElement;
@@ -58,8 +59,7 @@ export class EnrolleesComponent {
   private createGhosts(
     containerWidth: number,
     cellCount: number,
-    cellWidth: number,
-    gap: number = GAP
+    cellWidth: number
   ): void {
     // prettier-ignore
     if (!cellCount) { return; }

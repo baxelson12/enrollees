@@ -41,10 +41,11 @@ export class ToolbarComponent implements OnDestroy {
   ) {
     this.cs.setState({ sortBy: 'nameAsc' });
     this.subscription = this.form.valueChanges.subscribe(({ query }) =>
+      // Keep store in sync
       this.store.dispatch(Actions.queryBy({ query }))
     );
   }
-
+  // Change the sort direction
   sort(sort: SortBy): void {
     switch (sort) {
       case 'nameAsc':
