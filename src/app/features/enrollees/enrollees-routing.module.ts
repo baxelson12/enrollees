@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ParamGuard } from '../../shared/guards/param.guard';
+import { ParamGuard } from '../../core/guards/param.guard';
 import { EnrolleesComponent } from './enrollees.component';
 
 const routes: Routes = [

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -21,6 +21,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BadInputModule } from './shared/components/input/input.module';
 import { ToolbarModule } from './core/components/toolbar/toolbar.module';
 import { IdInterceptor } from './shared/interceptors/id.interceptor';
+import { storeFreeze } from 'ngrx-store-freeze';
+
+export const metaReducers: MetaReducer<{}>[] = !environment.production
+  ? [storeFreeze]
+  : [];
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +33,7 @@ import { IdInterceptor } from './shared/interceptors/id.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production

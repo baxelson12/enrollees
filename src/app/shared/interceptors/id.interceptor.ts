@@ -1,3 +1,17 @@
+/**
+ * Although this won't fix the (unlikely) problem of having an ID saved improperly
+ * instead of just erroring when the server stumbles upon an invalid, it could just
+ * convert to a proper uid with a similar approach as below.
+ *
+ * Or use the regex provided by uuid v4
+ * new RegExp(
+ *   "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+ *   "i",
+ * )
+ *
+ *
+ */
+
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -15,8 +29,6 @@ export class IdInterceptor implements HttpInterceptor {
   constructor() {}
 
   // For Invalid GUIDs
-  // ...Something should really be done server side
-  // instead.
   standardize(id: string): string {
     const regex = /[\w]{8}(-[\w]{4}){3}-[\w]{12}/;
     if (regex.test(id)) {
@@ -35,7 +47,6 @@ export class IdInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
-        console.log(event);
         if (event instanceof HttpResponse && event.body instanceof Array) {
           const arr = event.body as Enrollee[];
           const standardizedIds = arr.map((e) => ({

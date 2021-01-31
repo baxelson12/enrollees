@@ -23,13 +23,12 @@ export class EnrolleeEffects {
     this.actions$.pipe(
       ofType(ROOT_EFFECTS_INIT || EnrolleeActions.LOAD_ENROLLEES),
       concatMapTo(
-        this.ds
-          .all()
-          .pipe(
-            map((enrollees) =>
-              EnrolleeActions.loadEnrolleesSuccess({ enrollees })
-            )
-          )
+        this.ds.all().pipe(
+          map((enrollees) =>
+            EnrolleeActions.loadEnrolleesSuccess({ enrollees })
+          ),
+          catchError((e) => of(EnrolleeActions.loadEnrolleesFail()))
+        )
       )
     )
   );

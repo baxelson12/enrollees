@@ -1,7 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 import { Enrollee } from '../../core/interfaces/enrollee';
 
 import * as Selectors from '../../store/selectors';
@@ -16,7 +16,22 @@ const GAP = 20;
 export class EnrolleesComponent {
   @ViewChild('wrapper') wrapper: ElementRef;
   get div(): HTMLDivElement {
-    return this.wrapper.nativeElement;
+    try {
+      return this.wrapper.nativeElement;
+    } catch (error) {
+      console.warn(
+        'Attempting to access a native element before initialized.',
+        error
+      );
+    }
+  }
+  get cellWidth(): number {
+    try {
+      const cell = this.div.firstChild as HTMLDivElement;
+      return cell.offsetWidth;
+    } catch (error) {
+      console.warn('Attempting to access a nonexistent child', error);
+    }
   }
 
   enrollees$: Observable<Enrollee[]> = this.store
@@ -26,13 +41,10 @@ export class EnrolleesComponent {
       // We need to even out the grid
       tap((arr) => {
         // prettier-ignore
-        if (!this.wrapper || !this.div) { return; }
+        if (!this.div || !arr.length ) { return; }
         this.killGhosts();
         const len = arr.length;
-        const cell = this.div.children[0] as HTMLDivElement;
-        // prettier-ignore
-        if (!cell.offsetWidth) { return; }
-        this.createGhosts(this.div.offsetWidth, len, cell.offsetWidth);
+        this.createGhosts(this.div.offsetWidth ?? 0, len, this.cellWidth);
       })
     );
 
