@@ -1,6 +1,6 @@
 @import 'variables', 'mixins';
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,700&family=Open+Sans:wght@400;700&display=swap');
-@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 html,
 body {
@@ -29,4 +29,12 @@ svg-icon {
 h1,
 h2 {
   all: unset;
+}
+
+// Roughly 80kb of suffering saved
+// by NOT importing material's styles lol
+.mat-snack-bar-container {
+  background: $white;
+  border-radius: $radius;
+  box-shadow: $shadow-lg;
 }
