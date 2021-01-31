@@ -16,10 +16,14 @@
       <svg-icon
         *ngIf="sortBy === 'nameDesc'"
         src="assets/svg/sortAsc.svg"
+        role="button"
+        aria-label="Sort Ascending"
       ></svg-icon>
       <svg-icon
         *ngIf="sortBy === 'nameAsc'"
         src="assets/svg/sortDesc.svg"
+        role="button"
+        aria-label="Ascending"
       ></svg-icon>
     </button>
   </ng-container>
