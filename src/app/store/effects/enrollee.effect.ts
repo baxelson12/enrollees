@@ -41,9 +41,9 @@ export class EnrolleeEffects {
       ofType(EnrolleeActions.patchEnrollee),
       concatMap(({ enrollee }) =>
         this.ds.put(enrollee).pipe(
-          map((enrollee) => {
+          map((res) => {
             this.r.navigate(['..']);
-            return EnrolleeActions.patchEnrolleeSuccess({ enrollee });
+            return EnrolleeActions.patchEnrolleeSuccess({ enrollee: res });
           }),
           catchError((e) => of(EnrolleeActions.patchEnrolleeFail()))
         )
