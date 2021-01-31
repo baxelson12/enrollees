@@ -7,9 +7,10 @@ import {
   Router
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import * as Selectors from '../../store/selectors';
+import { DataService } from '../services/data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,15 +24,17 @@ export class ParamGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // If the id exists in store, we can continue navigating
-    return this.store
-      .select(Selectors.selectedEnrollee)
-      .pipe(
-        map((enrollee) =>
-          enrollee ? true : this.router.parseUrl('/enrollees')
-        )
-      );
+    // If the id exists, we can continue navigating
+    return this.store.select(Selectors.selectedEnrollee).pipe(
+      switchMap((enrollee) => this.ds.one(enrollee.id)),
+      map((enrollee) => (enrollee ? true : this.router.parseUrl('/enrollees'))),
+      catchError((e) => of(this.router.parseUrl('/enrollees')))
+    );
   }
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private ds: DataService,
+    private store: Store,
+    private router: Router
+  ) {}
 }
