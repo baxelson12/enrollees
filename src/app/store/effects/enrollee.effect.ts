@@ -12,7 +12,7 @@ import * as FromRouter from '@ngrx/router-store';
 import * as EnrolleeActions from '../actions/enrollee.actions';
 import * as Selectors from '../selectors';
 import { Store } from '@ngrx/store';
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarConfig } from '../../shared/constants/snack';
@@ -71,7 +71,7 @@ export class EnrolleeEffects {
       )
     )
   );
-
+  // Notify on errors
   error$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -84,6 +84,7 @@ export class EnrolleeEffects {
     { dispatch: false }
   );
 
+  // Notify on success
   success$ = createEffect(
     () =>
       this.actions$.pipe(
