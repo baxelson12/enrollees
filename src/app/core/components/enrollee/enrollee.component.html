@@ -82,7 +82,7 @@
       <div class="dob">
         <span>MM/DD/YYYY</span>
         <span *ngIf="state.enrollee.dateOfBirth">{{
-          state.enrollee.dateOfBirth
+          state.enrollee.dateOfBirth | date: 'MM/dd/yyyy'
         }}</span>
         <span *ngIf="!state.enrollee.dateOfBirth">UNKNOWN</span>
       </div>
