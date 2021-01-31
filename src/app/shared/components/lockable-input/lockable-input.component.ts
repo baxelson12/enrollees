@@ -37,6 +37,7 @@ export class LockableInputComponent extends BaseControlValueAccessor {
   // Select state
   state$: Observable<State> = this.store.select((s) => s);
   // Pertaining to angular form control
+  // tslint:disable-next-line: variable-name
   @Input('value') _value = '';
   @Input('input-type') inputType = 'text';
   @Input('aria-label') ariaLabel: string;

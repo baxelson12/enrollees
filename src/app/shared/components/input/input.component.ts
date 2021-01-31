@@ -23,6 +23,7 @@ import { BaseControlValueAccessor } from '../../abstractions/BaseControlValueAcc
 export class InputComponent extends BaseControlValueAccessor {
   // For focusing
   @ViewChild('input') input: ElementRef;
+  // tslint:disable-next-line: variable-name
   @Input('value') _value = '';
   @Input('input-type') inputType = 'text';
   @Input('aria-label') ariaLabel: string;

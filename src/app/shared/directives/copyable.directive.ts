@@ -11,7 +11,7 @@ export class CopyableDirective {
   @Input('badCopyable') value: string;
 
   // Watch for clicks
-  @HostListener('click') onClick() {
+  @HostListener('click') onClick(): void {
     this.clippy.copy(this.value);
     this.snack.open('Copied', '', SnackBarConfig);
   }
