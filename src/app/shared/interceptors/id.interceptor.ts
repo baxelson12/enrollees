@@ -35,7 +35,6 @@ export class IdInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
-        console.log(event);
         if (event instanceof HttpResponse && event.body instanceof Array) {
           const arr = event.body as Enrollee[];
           const standardizedIds = arr.map((e) => ({
