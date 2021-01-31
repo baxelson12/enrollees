@@ -23,6 +23,7 @@ import { BadInputModule } from './shared/components/input/input.module';
 import { ToolbarModule } from './core/components/toolbar/toolbar.module';
 import { IdInterceptor } from './shared/interceptors/id.interceptor';
 import { storeFreeze } from 'ngrx-store-freeze';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export const metaReducers: MetaReducer<{}>[] = !environment.production
   ? [storeFreeze]
@@ -51,7 +52,8 @@ export const metaReducers: MetaReducer<{}>[] = !environment.production
     BadToolbarModule,
     ReactiveFormsModule,
     BadInputModule,
-    ToolbarModule
+    ToolbarModule,
+    MatSnackBarModule
   ],
   providers: [
     DataService,
